@@ -29,11 +29,11 @@ public class CourseCategoryDTO {
         dto.setDescription(entity.getDescription());
         return dto;
     }
-    public static CourseCategoryDTO toEntity(CourseCategoryDTO dto){
+    public CourseCategoryDTO toEntity(){
         CourseCategoryDTO entity = new CourseCategoryDTO();
-        entity.setId(dto.getId());
-        entity.setName(dto.getName());
-        entity.setDescription(dto.getDescription());
+        entity.setId(this.getId());
+        entity.setName(this.getName());
+        entity.setDescription(this.getDescription());
         return entity;
 
     }

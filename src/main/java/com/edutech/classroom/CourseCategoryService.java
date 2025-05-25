@@ -1,7 +1,6 @@
 package com.edutech.classroom;
 
 import com.edutech.classroom.dto.CourseCategoryDTO;
-import com.edutech.classroom.entity.CourseCategory;
 import com.edutech.classroom.exception.ResourceNotFoundException;
 import com.edutech.classroom.repository.CourseCategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +19,24 @@ public class CourseCategoryService {
 
 public CourseCategoryDTO findById(Long id){
         return CourseCategoryDTO.fromEntity(repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada"))
+        );
 }
 
 public CourseCategoryDTO create(CourseCategoryDTO dto){
-        return CourseCategoryDTO.fromEntity(repo.save(CourseCategoryDTO.toEntity()));
+        return CourseCategoryDTO.fromEntity(repo.save(dto.toEntity()));
 
+}
+
+public CourseCategoryDTO update(Integer id, CourseCategoryDTO dto){
+        repo.findById(id).orElseThrow(() ->new ResourceNotFoundException("Categoria no encontrada"));
+        CourseCategoryDTO entity = dto.toEntity();
+        entity.setId(id);
+        return CourseCategoryDTO.fromEntity(repo.save(entity));
+}
+public void delete(Integer id){
+        repo.delete(repo.findById(id).orElseThrow(
+                ()->new ResourceNotFoundException("Categoria no encontrada")));
 }
 
 }
