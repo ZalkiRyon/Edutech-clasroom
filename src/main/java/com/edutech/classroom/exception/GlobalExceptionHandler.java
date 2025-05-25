@@ -1,6 +1,9 @@
 package com.edutech.classroom.exception;
 
-import jakarta.validation.ValidationException;
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -10,16 +13,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
-
-import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
+import jakarta.validation.ValidationException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(com.edutech.microservice.course_category.exception.ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleNotFound(com.edutech.microservice.course_category.exception.ResourceNotFoundException ex) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleNotFound(ResourceNotFoundException ex) {
         return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
