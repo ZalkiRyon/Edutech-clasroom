@@ -33,5 +33,4 @@ public class CourseCategoryDTO {
         entity.setDescription(dto.getDescription());
         return entity;
     }
-    //test
 }

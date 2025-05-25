@@ -32,4 +32,20 @@ public class CourseCategoryService {
         CourseCategory saved = repo.save(entity);
         return CourseCategoryDTO.fromEntity(saved);
     }
+    public CourseCategoryDTO update(Integer id, CourseCategoryDTO dto) {
+        var entity = repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada"));
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        var updated = repo.save(entity);
+        return CourseCategoryDTO.fromEntity(updated);
+    }
+
+    public void delete(Integer id) {
+        if (!repo.existsById(id)) {
+            throw new ResourceNotFoundException("Categoria no encontrada");
+        }
+        repo.deleteById(id);
+    }
+
 }
