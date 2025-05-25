@@ -1,42 +1,37 @@
 package com.edutech.classroom.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.edutech.classroom.entity.CourseCategory;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-
 public class CourseCategoryDTO {
 
     private Integer id;
 
     @NotNull(message = "El nombre de la categoria no puede estar vacio")
-    @Size(max = 100, message= "El nombre de la catergoria no puede superar los 100 caracteres")
+    @Size(max = 100, message= "El nombre de la categoria no puede superar los 100 caracteres")
     private String name;
 
-    @NotNull(message = "La descriocion de la categoria no puede estar vacia")
-    @Size(max = 800, message= "La descriocion  de la catergoria no puede superar los 800 caracteres")
+    @NotNull(message = "La descripcion de la categoria no puede estar vacia")
+    @Size(max = 800, message= "La descripcion de la categoria no puede superar los 800 caracteres")
     private String description;
 
-    public static CourseCategoryDTO fromEntity(CourseCategoryDTO entity){
+    public static CourseCategoryDTO fromEntity(CourseCategory entity){
         CourseCategoryDTO dto = new CourseCategoryDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
         return dto;
     }
-    public CourseCategoryDTO toEntity(){
-        CourseCategoryDTO entity = new CourseCategoryDTO();
-        entity.setId(this.getId());
-        entity.setName(this.getName());
-        entity.setDescription(this.getDescription());
+
+    public static CourseCategory toEntity(CourseCategoryDTO dto){
+        CourseCategory entity = new CourseCategory();
+        entity.setId(dto.getId());
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
         return entity;
-
     }
-
-
+    //test
 }
