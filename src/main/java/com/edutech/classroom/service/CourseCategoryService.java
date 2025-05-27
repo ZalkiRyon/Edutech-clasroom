@@ -1,4 +1,4 @@
-package com.edutech.classroom;
+package com.edutech.classroom.service;
 
 import com.edutech.classroom.dto.CourseCategoryDTO;
 import com.edutech.classroom.entity.CourseCategory;
