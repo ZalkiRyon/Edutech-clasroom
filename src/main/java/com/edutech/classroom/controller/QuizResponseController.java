@@ -1,7 +1,7 @@
 package com.edutech.classroom.controller;
 
-import com.edutech.classroom.dto.DiscountCouponDTO;
-import com.edutech.classroom.service.DiscountCouponService;
+import com.edutech.classroom.dto.QuizResponseDTO;
+import com.edutech.classroom.service.QuizResponseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,28 +10,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/discount-coupons")
+@RequestMapping("/api/quiz-responses")
 @RequiredArgsConstructor
-public class DiscountCouponController {
-    private final DiscountCouponService service;
+public class QuizResponseController {
+    private final QuizResponseService service;
 
     @GetMapping
-    public ResponseEntity<List<DiscountCouponDTO>> findAll() {
+    public ResponseEntity<List<QuizResponseDTO>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DiscountCouponDTO> findById(@PathVariable Integer id) {
+    public ResponseEntity<QuizResponseDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<DiscountCouponDTO> create(@Valid @RequestBody DiscountCouponDTO dto) {
+    public ResponseEntity<QuizResponseDTO> create(@Valid @RequestBody QuizResponseDTO dto) {
         return ResponseEntity.ok(service.create(dto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DiscountCouponDTO> update(@PathVariable Integer id, @Valid @RequestBody DiscountCouponDTO dto) {
+    public ResponseEntity<QuizResponseDTO> update(@PathVariable Integer id, @Valid @RequestBody QuizResponseDTO dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 

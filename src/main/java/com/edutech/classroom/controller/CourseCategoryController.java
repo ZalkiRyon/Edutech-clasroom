@@ -1,7 +1,7 @@
 package com.edutech.classroom.controller;
 
 import com.edutech.classroom.dto.CourseCategoryDTO;
-import com.edutech.classroom.CourseCategoryService;
+import com.edutech.classroom.service.CourseCategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
