@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -46,6 +47,14 @@ public class GlobalExceptionHandler {
             fieldErrors.put(field, message);
         }
         return buildErrorResponse(HttpStatus.BAD_REQUEST, "Error de validación en uno o más campos", fieldErrors);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<Map<String, Object>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        String param = ex.getName();
+        String value = ex.getValue() != null ? ex.getValue().toString() : "null";
+        String message = String.format("El parámetro '%s' con valor '%s' no es válido. Se esperaba un valor numérico.", param, value);
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, message, null);
     }
 
     @ExceptionHandler(Exception.class)
