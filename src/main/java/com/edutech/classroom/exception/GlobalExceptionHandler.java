@@ -20,48 +20,48 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(ResourceNotFoundException ex) {
-        return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+        return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage(), null);
     }
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<Map<String, Object>> handleValidation(ValidationException ex) {
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), null);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleValidationError(MethodArgumentNotValidException ex) {
+        Map<String, String> fieldErrors = new HashMap<>();
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+            fieldErrors.put(error.getField(), error.getDefaultMessage());
+        }
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, "Error de validación en uno o más campos", fieldErrors);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Map<String, Object>> handleConstraintViolation(ConstraintViolationException ex) {
+        Map<String, String> fieldErrors = new HashMap<>();
+        for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
+            String field = violation.getPropertyPath().toString();
+            String message = violation.getMessage();
+            fieldErrors.put(field, message);
+        }
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, "Error de validación en uno o más campos", fieldErrors);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGeneral(Exception ex) {
-        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Error interno del servidor");
+        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Error interno del servidor", null);
     }
 
-    private ResponseEntity<Map<String, Object>> buildErrorResponse(HttpStatus status, String message) {
+    private ResponseEntity<Map<String, Object>> buildErrorResponse(HttpStatus status, String message, Map<String, String> fieldErrors) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", Instant.now());
         body.put("status", status.value());
         body.put("error", status.getReasonPhrase());
         body.put("message", message);
+        if (fieldErrors != null && !fieldErrors.isEmpty()) {
+            body.put("fieldErrors", fieldErrors);
+        }
         return new ResponseEntity<>(body, status);
     }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationError(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.put(error.getField(), error.getDefaultMessage());
-        }
-
-        return ResponseEntity.badRequest().body(errors);
-    }
-
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<Map<String, String>> handleConstraintViolation(ConstraintViolationException ex) {
-        Map<String, String> errors = new HashMap<>();
-        for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
-            String field = violation.getPropertyPath().toString();
-            String message = violation.getMessage();
-            errors.put(field, message);
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-    }
-
 }
