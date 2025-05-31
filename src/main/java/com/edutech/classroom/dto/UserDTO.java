@@ -1,42 +1,44 @@
 package com.edutech.classroom.dto;
 
+import java.time.Instant;
+
 import com.edutech.classroom.entity.User;
+
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.time.Instant;
 
 @Data
 public class UserDTO {
     private Integer id;
 
-    @NotNull
-    @Size(max = 100)
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
     private String firstName;
 
-    @NotNull
-    @Size(max = 100)
+    @NotBlank(message = "El apellido no puede estar vacío")
+    @Size(max = 100, message = "El apellido no puede superar los 100 caracteres")
     private String lastName;
 
-    @NotNull
-    @Size(max = 255)
+    @NotBlank(message = "El email no puede estar vacío")
+    @Size(max = 255, message = "El email no puede superar los 255 caracteres")
     private String email;
 
-    @NotNull
-    @Size(max = 255)
+    @NotBlank(message = "La contraseña no puede estar vacía")
+    @Size(max = 255, message = "La contraseña no puede superar los 255 caracteres")
     private String passwordHash;
 
-    @NotNull
+    @NotNull(message = "El rol es obligatorio")
     private Integer roleId;
 
-    @NotNull
+    @NotNull(message = "El estado de activación es obligatorio")
     private Boolean isActive;
 
-    @NotNull
+    @NotNull(message = "La fecha de creación es obligatoria")
     private Instant createdAt;
 
-    @NotNull
+    @NotNull(message = "La fecha de actualización es obligatoria")
     private Instant updatedAt;
 
     public static UserDTO fromEntity(User entity) {

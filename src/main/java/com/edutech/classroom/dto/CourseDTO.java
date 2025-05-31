@@ -1,6 +1,7 @@
 package com.edutech.classroom.dto;
 
 import com.edutech.classroom.entity.Course;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -21,12 +22,12 @@ public class CourseDTO {
     @NotNull
     private Integer instructorId;
 
-    @NotNull
-    @Size(max = 200)
+    @NotBlank(message = "El título no puede estar vacío")
+    @Size(max = 200, message = "El título no puede superar los 200 caracteres")
     private String title;
 
-    @NotNull
-    @Size(max = 800)
+    @NotBlank(message = "La descripción no puede estar vacía")
+    @Size(max = 800, message = "La descripción no puede superar los 800 caracteres")
     private String description;
 
     @NotNull
@@ -35,12 +36,12 @@ public class CourseDTO {
     @NotNull
     private BigDecimal price;
 
-    @NotNull
-    @Size(max = 255)
+    @NotBlank(message = "La imagen no puede estar vacía")
+    @Size(max = 255, message = "La imagen no puede superar los 255 caracteres")
     private String image;
 
-    @NotNull
-    @Size(max = 50)
+    @NotBlank(message = "El estado no puede estar vacío")
+    @Size(max = 50, message = "El estado no puede superar los 50 caracteres")
     private String status;
 
     public static CourseDTO fromEntity(Course entity) {

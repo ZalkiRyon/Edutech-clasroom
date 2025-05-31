@@ -1,11 +1,13 @@
 package com.edutech.classroom.dto;
 
+import java.time.Instant;
+
 import com.edutech.classroom.entity.CourseQuizQuestion;
+
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.time.Instant;
 
 @Data
 public class CourseQuizQuestionDTO {
@@ -14,28 +16,35 @@ public class CourseQuizQuestionDTO {
     @NotNull
     private Integer quizId;
 
-    @Size(max = 800)
+    @NotBlank(message = "La pregunta no puede estar vacía")
+    @Size(max = 800, message = "La pregunta no puede superar los 800 caracteres")
     private String questionText;
 
-    @Size(max = 800)
+    @NotBlank(message = "La opción A no puede estar vacía")
+    @Size(max = 800, message = "La opción A no puede superar los 800 caracteres")
     private String optionA;
 
-    @Size(max = 800)
+    @NotBlank(message = "La opción B no puede estar vacía")
+    @Size(max = 800, message = "La opción B no puede superar los 800 caracteres")
     private String optionB;
 
-    @Size(max = 800)
+    @NotBlank(message = "La opción C no puede estar vacía")
+    @Size(max = 800, message = "La opción C no puede superar los 800 caracteres")
     private String optionC;
 
-    @Size(max = 800)
+    @NotBlank(message = "La opción D no puede estar vacía")
+    @Size(max = 800, message = "La opción D no puede superar los 800 caracteres")
     private String optionD;
 
-    @Size(max = 800)
+    @Size(max = 800, message = "La opción E no puede superar los 800 caracteres")
     private String optionE;
 
-    @Size(max = 800)
+    @NotBlank(message = "La respuesta correcta no puede estar vacía")
+    @Size(max = 800, message = "La respuesta correcta no puede superar los 800 caracteres")
     private String correctAnswer;
 
-    @Size(max = 1)
+    @NotBlank(message = "La opción correcta no puede estar vacía")
+    @Size(max = 1, message = "La opción correcta debe ser una sola letra")
     private String correctOption;
 
     @NotNull

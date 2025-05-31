@@ -1,34 +1,36 @@
 package com.edutech.classroom.dto;
 
+import java.time.Instant;
+
 import com.edutech.classroom.entity.SupportTicket;
+
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.time.Instant;
 
 @Data
 public class SupportTicketDTO {
     private Integer id;
 
-    @NotNull
+    @NotNull(message = "El ID del usuario es obligatorio")
     private Integer userId;
 
     private Integer supportUserId;
 
-    @NotNull
-    @Size(max = 200)
+    @NotBlank(message = "El asunto no puede estar vacío")
+    @Size(max = 200, message = "El asunto no puede superar los 200 caracteres")
     private String subject;
 
-    @NotNull
-    @Size(max = 800)
+    @NotBlank(message = "La descripción no puede estar vacía")
+    @Size(max = 800, message = "La descripción no puede superar los 800 caracteres")
     private String description;
 
-    @NotNull
-    @Size(max = 20)
+    @NotBlank(message = "El estado no puede estar vacío")
+    @Size(max = 20, message = "El estado no puede superar los 20 caracteres")
     private String status;
 
-    @NotNull
+    @NotNull(message = "La fecha de creación es obligatoria")
     private Instant createdAt;
 
     private Instant closedAt;

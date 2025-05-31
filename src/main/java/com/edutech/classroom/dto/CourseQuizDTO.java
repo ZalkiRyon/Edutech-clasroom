@@ -1,11 +1,13 @@
 package com.edutech.classroom.dto;
 
+import java.time.Instant;
+
 import com.edutech.classroom.entity.CourseQuiz;
+
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.time.Instant;
 
 @Data
 public class CourseQuizDTO {
@@ -14,16 +16,16 @@ public class CourseQuizDTO {
     @NotNull
     private Integer courseId;
 
-    @NotNull
-    @Size(max = 200)
+    @NotBlank(message = "El título del quiz no puede estar vacío")
+    @Size(max = 200, message = "El título del quiz no puede superar los 200 caracteres")
     private String title;
 
-    @NotNull
-    @Size(max = 800)
+    @NotBlank(message = "La descripción del quiz no puede estar vacía")
+    @Size(max = 800, message = "La descripción del quiz no puede superar los 800 caracteres")
     private String description;
 
-    @NotNull
-    @Size(max = 50)
+    @NotBlank(message = "El tipo de quiz no puede estar vacío")
+    @Size(max = 50, message = "El tipo de quiz no puede superar los 50 caracteres")
     private String quizType;
 
     @NotNull

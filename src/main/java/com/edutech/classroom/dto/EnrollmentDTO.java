@@ -1,6 +1,7 @@
 package com.edutech.classroom.dto;
 
 import com.edutech.classroom.entity.Enrollment;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -10,13 +11,16 @@ import java.time.Instant;
 public class EnrollmentDTO {
     private Integer id;
 
-    @NotNull
+    @NotNull(message = "El ID del estudiante es obligatorio")
     private Integer studentId;
 
-    @NotNull
+    @NotNull(message = "El ID del curso es obligatorio")
     private Integer courseId;
 
+    @NotNull(message = "La fecha de inscripción es obligatoria")
     private Instant enrolledAt;
+
+    @NotBlank(message = "El estado de la inscripción no puede estar vacío")
     private String status;
 
     public static EnrollmentDTO fromEntity(Enrollment entity) {

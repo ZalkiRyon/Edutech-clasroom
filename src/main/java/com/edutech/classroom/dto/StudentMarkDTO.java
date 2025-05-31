@@ -1,30 +1,31 @@
 package com.edutech.classroom.dto;
 
+import java.math.BigDecimal;
+import java.time.Instant;
+
 import com.edutech.classroom.entity.StudentMark;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.math.BigDecimal;
-import java.time.Instant;
 
 @Data
 public class StudentMarkDTO {
     private Integer id;
 
-    @NotNull
+    @NotNull(message = "El ID del quiz es obligatorio")
     private Integer quizId;
 
-    @NotNull
+    @NotNull(message = "El ID del estudiante es obligatorio")
     private Integer studentId;
 
-    @NotNull
+    @NotNull(message = "La nota es obligatoria")
     private BigDecimal mark;
 
-    @Size(max = 800)
+    @Size(max = 800, message = "Los comentarios no pueden superar los 800 caracteres")
     private String comments;
 
-    @NotNull
+    @NotNull(message = "La fecha de calificación es obligatoria")
     private Instant gradedAt;
 
     public static StudentMarkDTO fromEntity(StudentMark entity) {
