@@ -1,15 +1,17 @@
 package com.edutech.classroom.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.edutech.classroom.dto.CourseQuizDTO;
-import com.edutech.classroom.entity.CourseQuiz;
 import com.edutech.classroom.entity.Course;
+import com.edutech.classroom.entity.CourseQuiz;
 import com.edutech.classroom.exception.ResourceNotFoundException;
 import com.edutech.classroom.repository.CourseQuizRepository;
 import com.edutech.classroom.repository.CourseRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

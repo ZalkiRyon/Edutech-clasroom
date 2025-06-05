@@ -28,7 +28,6 @@ public class CourseQuizDTO {
     @Size(max = 50, message = "El tipo de quiz no puede superar los 50 caracteres")
     private String quizType;
 
-    @NotNull
     private Instant createdAt;
 
     public static CourseQuizDTO fromEntity(CourseQuiz entity) {

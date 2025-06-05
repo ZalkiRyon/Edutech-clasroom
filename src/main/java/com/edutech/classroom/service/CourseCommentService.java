@@ -1,17 +1,20 @@
 package com.edutech.classroom.service;
 
+import java.time.Instant;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.edutech.classroom.dto.CourseCommentDTO;
-import com.edutech.classroom.entity.CourseComment;
 import com.edutech.classroom.entity.Course;
+import com.edutech.classroom.entity.CourseComment;
 import com.edutech.classroom.entity.User;
 import com.edutech.classroom.exception.ResourceNotFoundException;
 import com.edutech.classroom.repository.CourseCommentRepository;
 import com.edutech.classroom.repository.CourseRepository;
 import com.edutech.classroom.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +46,11 @@ public class CourseCommentService {
         entity.setCourse(course);
         entity.setUser(user);
 
+        // Asignar createdAt si es null
+        if (entity.getCreatedAt() == null) {
+            entity.setCreatedAt(Instant.now());
+        }
+
         CourseComment saved = repo.save(entity);
         return CourseCommentDTO.fromEntity(saved);
     }
@@ -60,7 +68,7 @@ public class CourseCommentService {
         entity.setUser(user);
         entity.setCommentText(dto.getCommentText());
         entity.setRating(dto.getRating());
-        entity.setCreatedAt(dto.getCreatedAt());
+        // No modificar createdAt en update
 
         CourseComment updated = repo.save(entity);
         return CourseCommentDTO.fromEntity(updated);
