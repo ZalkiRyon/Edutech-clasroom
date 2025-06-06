@@ -36,6 +36,7 @@ public class UserService {
 
         User entity = UserDTO.toEntity(dto);
         entity.setRole(role);
+        
 
         User saved = repo.save(entity);
         return UserDTO.fromEntity(saved);

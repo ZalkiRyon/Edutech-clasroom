@@ -50,7 +50,7 @@ public class CourseQuizQuestionDTO {
     @NotNull
     private Integer orderIndex;
 
-    @NotNull
+    
     private Instant createdAt;
 
     public static CourseQuizQuestionDTO fromEntity(CourseQuizQuestion entity) {

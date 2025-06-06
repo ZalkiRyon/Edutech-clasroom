@@ -35,10 +35,10 @@ public class UserDTO {
     @NotNull(message = "El estado de activación es obligatorio")
     private Boolean isActive;
 
-    @NotNull(message = "La fecha de creación es obligatoria")
+
     private Instant createdAt;
 
-    @NotNull(message = "La fecha de actualización es obligatoria")
+
     private Instant updatedAt;
 
     public static UserDTO fromEntity(User entity) {

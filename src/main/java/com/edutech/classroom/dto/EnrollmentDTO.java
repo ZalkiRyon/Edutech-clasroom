@@ -17,7 +17,7 @@ public class EnrollmentDTO {
     @NotNull(message = "El ID del curso es obligatorio")
     private Integer courseId;
 
-    @NotNull(message = "La fecha de inscripción es obligatoria")
+
     private Instant enrolledAt;
 
     @NotBlank(message = "El estado de la inscripción no puede estar vacío")

@@ -30,7 +30,7 @@ public class QuizResponseDTO {
     @Size(max = 800, message = "La URL de la tarea no puede superar los 800 caracteres")
     private String assignmentUrl;
 
-    @NotNull(message = "La fecha de envío es obligatoria")
+
     private Instant submittedAt;
 
     public static QuizResponseDTO fromEntity(QuizResponse entity) {

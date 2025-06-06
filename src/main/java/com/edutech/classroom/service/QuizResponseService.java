@@ -42,6 +42,9 @@ public class QuizResponseService {
         QuizResponse entity = QuizResponseDTO.toEntity(dto);
         entity.setQuiz(quiz);
         entity.setStudent(student);
+        if (entity.getSubmittedAt() == null) {
+            entity.setSubmittedAt(java.time.Instant.now());
+        }
 
         QuizResponse saved = repo.save(entity);
         return QuizResponseDTO.fromEntity(saved);
@@ -61,7 +64,7 @@ public class QuizResponseService {
         entity.setSelectedOption(dto.getSelectedOption());
         entity.setResponseContent(dto.getResponseContent());
         entity.setAssignmentUrl(dto.getAssignmentUrl());
-        entity.setSubmittedAt(dto.getSubmittedAt());
+
 
         QuizResponse updated = repo.save(entity);
         return QuizResponseDTO.fromEntity(updated);

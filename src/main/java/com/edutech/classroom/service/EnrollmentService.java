@@ -42,6 +42,9 @@ public class EnrollmentService {
         Enrollment entity = EnrollmentDTO.toEntity(dto);
         entity.setCourse(course);
         entity.setStudent(student);
+        if (entity.getEnrolledAt() == null) {
+        entity.setEnrolledAt(java.time.Instant.now());
+    }
 
         Enrollment saved = repo.save(entity);
         return EnrollmentDTO.fromEntity(saved);
@@ -58,7 +61,7 @@ public class EnrollmentService {
 
         entity.setCourse(course);
         entity.setStudent(student);
-        entity.setEnrolledAt(dto.getEnrolledAt());
+       
         entity.setStatus(dto.getStatus());
 
         Enrollment updated = repo.save(entity);

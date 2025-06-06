@@ -20,7 +20,7 @@ public class PaymentDTO {
     @NotNull(message = "El monto es obligatorio")
     private BigDecimal amount;
 
-    @NotNull(message = "La fecha de pago es obligatoria")
+
     private Instant paymentDate;
 
     @NotBlank(message = "El método de pago no puede estar vacío")

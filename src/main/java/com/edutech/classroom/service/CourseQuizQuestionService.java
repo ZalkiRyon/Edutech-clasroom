@@ -37,6 +37,10 @@ public class CourseQuizQuestionService {
         CourseQuizQuestion entity = CourseQuizQuestionDTO.toEntity(dto);
         entity.setQuiz(quiz);
 
+          if (entity.getCreatedAt() == null) {
+        entity.setCreatedAt(java.time.Instant.now());
+      }
+
         CourseQuizQuestion saved = repo.save(entity);
         return CourseQuizQuestionDTO.fromEntity(saved);
     }
@@ -58,7 +62,7 @@ public class CourseQuizQuestionService {
         entity.setCorrectAnswer(dto.getCorrectAnswer());
         entity.setCorrectOption(dto.getCorrectOption());
         entity.setOrderIndex(dto.getOrderIndex());
-        entity.setCreatedAt(dto.getCreatedAt());
+        
 
         CourseQuizQuestion updated = repo.save(entity);
         return CourseQuizQuestionDTO.fromEntity(updated);

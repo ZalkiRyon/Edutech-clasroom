@@ -30,7 +30,7 @@ public class SupportTicketDTO {
     @Size(max = 20, message = "El estado no puede superar los 20 caracteres")
     private String status;
 
-    @NotNull(message = "La fecha de creación es obligatoria")
+
     private Instant createdAt;
 
     private Instant closedAt;

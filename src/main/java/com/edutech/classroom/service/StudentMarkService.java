@@ -42,6 +42,9 @@ public class StudentMarkService {
         StudentMark entity = StudentMarkDTO.toEntity(dto);
         entity.setQuiz(quiz);
         entity.setStudent(student);
+        if (entity.getGradedAt() == null) {
+            entity.setGradedAt(java.time.Instant.now());
+        }
 
         StudentMark saved = repo.save(entity);
         return StudentMarkDTO.fromEntity(saved);
@@ -60,7 +63,7 @@ public class StudentMarkService {
         entity.setStudent(student);
         entity.setMark(dto.getMark());
         entity.setComments(dto.getComments());
-        entity.setGradedAt(dto.getGradedAt());
+
 
         StudentMark updated = repo.save(entity);
         return StudentMarkDTO.fromEntity(updated);

@@ -25,7 +25,7 @@ public class StudentMarkDTO {
     @Size(max = 800, message = "Los comentarios no pueden superar los 800 caracteres")
     private String comments;
 
-    @NotNull(message = "La fecha de calificación es obligatoria")
+
     private Instant gradedAt;
 
     public static StudentMarkDTO fromEntity(StudentMark entity) {

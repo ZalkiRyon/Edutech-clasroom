@@ -42,6 +42,10 @@ public class SupportTicketService {
         SupportTicket entity = SupportTicketDTO.toEntity(dto);
         entity.setUser(user);
         entity.setSupportUser(supportUser);
+        if (entity.getCreatedAt() == null) {
+            entity.setCreatedAt(java.time.Instant.now());
+        }
+        entity.setClosedAt(null);
 
         SupportTicket saved = repo.save(entity);
         return SupportTicketDTO.fromEntity(saved);
@@ -66,6 +70,10 @@ public class SupportTicketService {
         entity.setStatus(dto.getStatus());
         entity.setCreatedAt(dto.getCreatedAt());
         entity.setClosedAt(dto.getClosedAt());
+
+        if (dto.getClosedAt() != null) {
+            entity.setClosedAt(dto.getClosedAt());
+        }
 
         SupportTicket updated = repo.save(entity);
         return SupportTicketDTO.fromEntity(updated);

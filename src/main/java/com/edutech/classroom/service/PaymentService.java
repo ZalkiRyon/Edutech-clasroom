@@ -36,6 +36,9 @@ public class PaymentService {
 
         Payment entity = PaymentDTO.toEntity(dto);
         entity.setUser(user);
+        if (entity.getPaymentDate() == null) {
+            entity.setPaymentDate(java.time.Instant.now());
+        }
 
         Payment saved = repo.save(entity);
         return PaymentDTO.fromEntity(saved);
@@ -50,7 +53,7 @@ public class PaymentService {
 
         entity.setUser(user);
         entity.setAmount(dto.getAmount());
-        entity.setPaymentDate(dto.getPaymentDate());
+
         entity.setPaymentMethod(dto.getPaymentMethod());
         entity.setPaymentInstitution(dto.getPaymentInstitution());
         entity.setTransactionId(dto.getTransactionId());
