@@ -1,15 +1,17 @@
 package com.edutech.classroom.service;
+import java.time.Instant;
+import java.util.List;
 
-import com.edutech.classroom.dto.UserDTO;
-import com.edutech.classroom.entity.User;
-import com.edutech.classroom.entity.Role;
-import com.edutech.classroom.exception.ResourceNotFoundException;
-import com.edutech.classroom.repository.UserRepository;
-import com.edutech.classroom.repository.RoleRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.edutech.classroom.dto.UserDTO;
+import com.edutech.classroom.entity.Role;
+import com.edutech.classroom.entity.User;
+import com.edutech.classroom.exception.ResourceNotFoundException;
+import com.edutech.classroom.repository.RoleRepository;
+import com.edutech.classroom.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +38,9 @@ public class UserService {
 
         User entity = UserDTO.toEntity(dto);
         entity.setRole(role);
-        
+         Instant now = java.time.Instant.now();
+    entity.setCreatedAt(now);
+    entity.setUpdatedAt(now);
 
         User saved = repo.save(entity);
         return UserDTO.fromEntity(saved);
@@ -55,8 +59,8 @@ public class UserService {
         entity.setPasswordHash(dto.getPasswordHash());
         entity.setRole(role);
         entity.setIsActive(dto.getIsActive());
-        entity.setCreatedAt(dto.getCreatedAt());
-        entity.setUpdatedAt(dto.getUpdatedAt());
+
+        entity.setUpdatedAt(java.time.Instant.now());
 
         User updated = repo.save(entity);
         return UserDTO.fromEntity(updated);

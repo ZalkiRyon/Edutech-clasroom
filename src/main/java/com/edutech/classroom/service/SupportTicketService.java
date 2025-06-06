@@ -1,15 +1,17 @@
 package com.edutech.classroom.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.edutech.classroom.dto.SupportTicketDTO;
 import com.edutech.classroom.entity.SupportTicket;
 import com.edutech.classroom.entity.User;
 import com.edutech.classroom.exception.ResourceNotFoundException;
 import com.edutech.classroom.repository.SupportTicketRepository;
 import com.edutech.classroom.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -68,8 +70,8 @@ public class SupportTicketService {
         entity.setSubject(dto.getSubject());
         entity.setDescription(dto.getDescription());
         entity.setStatus(dto.getStatus());
-        entity.setCreatedAt(dto.getCreatedAt());
-        entity.setClosedAt(dto.getClosedAt());
+        
+        
 
         if (dto.getClosedAt() != null) {
             entity.setClosedAt(dto.getClosedAt());

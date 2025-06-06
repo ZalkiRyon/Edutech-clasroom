@@ -38,6 +38,9 @@ public class CourseQuizService {
 
         CourseQuiz entity = CourseQuizDTO.toEntity(dto);
         entity.setCourse(course);
+        if (entity.getCreatedAt() == null) {
+            entity.setCreatedAt(java.time.Instant.now());
+        }
 
         CourseQuiz saved = repo.save(entity);
         return CourseQuizDTO.fromEntity(saved);
@@ -54,7 +57,7 @@ public class CourseQuizService {
         entity.setTitle(dto.getTitle());
         entity.setDescription(dto.getDescription());
         entity.setQuizType(dto.getQuizType());
-        entity.setCreatedAt(dto.getCreatedAt());
+
 
         CourseQuiz updated = repo.save(entity);
         return CourseQuizDTO.fromEntity(updated);
